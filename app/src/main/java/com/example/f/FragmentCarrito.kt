@@ -19,7 +19,7 @@ class FragmentCarrito : Fragment() {
     private lateinit var totalPriceTextView: TextView
     private lateinit var checkoutButton: Button
     private lateinit var cartAdapter: CartAdapter
-    private lateinit var cartItems: MutableList<CartItem>
+    private var cartItems: MutableList<CartItem> = mutableListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,23 +30,14 @@ class FragmentCarrito : Fragment() {
         totalPriceTextView = view.findViewById(R.id.total_price_text_view)
         checkoutButton = view.findViewById(R.id.checkout_button)
 
-        // Placeholder for cart items
-        cartItems = mutableListOf(
-            CartItem(Product(1, "Producto 1", 10.0, "https://via.placeholder.com/150"), 1),
-            CartItem(Product(2, "Producto 2", 20.0, "https://via.placeholder.com/150"), 2)
-            // Añadir más items aquí
-        )
+        cartItems = CartManager.getCartItems().toMutableList()
 
         cartAdapter = CartAdapter(cartItems, { cartItem, newQuantity ->
-            // Acción al cambiar la cantidad
-            cartItem.quantity = newQuantity
-            cartAdapter.notifyDataSetChanged()
-            updateTotalPrice()
+            CartManager.updateQuantity(cartItem.product, newQuantity)
+            updateCart()
         }, { cartItem ->
-            // Acción al eliminar el item del carrito
-            cartItems.remove(cartItem)
-            cartAdapter.notifyDataSetChanged()
-            updateTotalPrice()
+            CartManager.removeProduct(cartItem.product)
+            updateCart()
         })
 
         recyclerView.layoutManager = LinearLayoutManager(context)
@@ -61,8 +52,15 @@ class FragmentCarrito : Fragment() {
         return view
     }
 
+    private fun updateCart() {
+        cartItems.clear()
+        cartItems.addAll(CartManager.getCartItems())
+        cartAdapter.notifyDataSetChanged()
+        updateTotalPrice()
+    }
+
     private fun updateTotalPrice() {
-        val totalPrice = cartItems.sumByDouble { it.product.price * it.quantity }
+        val totalPrice = CartManager.getTotalPrice()
         totalPriceTextView.text = "Total: $$totalPrice"
     }
 }
