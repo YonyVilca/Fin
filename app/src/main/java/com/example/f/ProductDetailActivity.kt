@@ -5,7 +5,6 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.f.Product
 import com.squareup.picasso.Picasso
 
 class ProductDetailActivity : AppCompatActivity() {

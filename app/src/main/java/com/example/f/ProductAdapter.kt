@@ -8,9 +8,6 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.f.ProductDetailActivity
-import com.example.f.R
-import com.example.f.Product
 import com.squareup.picasso.Picasso
 
 class ProductAdapter(

@@ -8,8 +8,6 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.f.ProductAdapter
-import com.example.f.Product
 
 class FragmentInicio : Fragment() {
 
@@ -38,7 +36,7 @@ class FragmentInicio : Fragment() {
         )
 
         productAdapter = ProductAdapter(products) { product ->
-            // Acción al añadir al carrito
+            CartManager.addProduct(product)
         }
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = productAdapter

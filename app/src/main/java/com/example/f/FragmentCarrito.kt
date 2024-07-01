@@ -9,9 +9,6 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.f.CartAdapter
-import com.example.f.CartItem
-import com.example.f.Product
 
 class FragmentCarrito : Fragment() {
 
