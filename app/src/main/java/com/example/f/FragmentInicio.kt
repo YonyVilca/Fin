@@ -32,8 +32,8 @@ class FragmentInicio : Fragment() {
 
         // Placeholder for products
         products = listOf(
-            Product(1, "Producto 1", 10.0, "https://via.placeholder.com/150"),
-            Product(2, "Producto 2", 20.0, "https://via.placeholder.com/150"),
+            Product(1, "Producto 1", 10.0, "https://via.placeholder.com/150", "Descripción del producto 1"),
+            Product(2, "Producto 2", 20.0, "https://via.placeholder.com/150", "Descripción del producto 2"),
             // Añadir más productos aquí
         )
 

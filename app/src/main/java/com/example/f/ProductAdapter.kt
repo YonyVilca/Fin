@@ -1,5 +1,6 @@
 package com.example.f
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,7 +8,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.f.CartManager
+import com.example.f.ProductDetailActivity
 import com.example.f.R
 import com.example.f.Product
 import com.squareup.picasso.Picasso
@@ -35,8 +36,14 @@ class ProductAdapter(
         holder.productPrice.text = "$${product.price}"
         Picasso.get().load(product.imageUrl).into(holder.productImage)
         holder.addToCartButton.setOnClickListener {
-            CartManager.addProduct(product)
             onAddToCartClickListener(product)
+        }
+        holder.itemView.setOnClickListener {
+            val context = holder.itemView.context
+            val intent = Intent(context, ProductDetailActivity::class.java).apply {
+                putExtra("product", product)
+            }
+            context.startActivity(intent)
         }
     }
 
