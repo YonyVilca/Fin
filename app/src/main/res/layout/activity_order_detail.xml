@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Dropdown for Department -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Departamento" />
+        <Spinner
+            android:id="@+id/spinner_department"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- Dropdown for Province -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Provincia"
+            android:layout_marginTop="16dp" />
+        <Spinner
+            android:id="@+id/spinner_province"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- Dropdown for District -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Distrito"
+            android:layout_marginTop="16dp" />
+        <Spinner
+            android:id="@+id/spinner_district"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- List of Pharmacies -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Farmacias disponibles"
+            android:layout_marginTop="16dp" />
+        <ListView
+            android:id="@+id/list_view_pharmacies"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- Payment Options -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="¿Cómo quieres pagar?"
+            android:layout_marginTop="16dp" />
+        <RadioGroup
+            android:id="@+id/radio_group_payment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/radio_yape"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="YAPE" />
+
+            <RadioButton
+                android:id="@+id/radio_card"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tarjeta" />
+
+            <RadioButton
+                android:id="@+id/radio_cash"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PagoEfectivo" />
+        </RadioGroup>
+
+        <!-- Payment Voucher Options -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Comprobante de pago"
+            android:layout_marginTop="16dp" />
+        <RadioGroup
+            android:id="@+id/radio_group_voucher"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/radio_receipt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Boleta" />
+
+            <RadioButton
+                android:id="@+id/radio_invoice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Factura" />
+        </RadioGroup>
+
+        <!-- Buttons -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp"
+            android:gravity="end">
+
+            <Button
+                android:id="@+id/button_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Regresar" />
+
+            <Button
+                android:id="@+id/button_complete_purchase"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Finalizar compra"
+                android:layout_marginStart="16dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

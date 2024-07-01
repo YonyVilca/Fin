@@ -1,5 +1,6 @@
 package com.example.f
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -43,7 +44,8 @@ class FragmentCarrito : Fragment() {
         updateTotalPrice()
 
         checkoutButton.setOnClickListener {
-            // Acción al realizar la compra
+            val intent = Intent(context, OrderDetailActivity::class.java)
+            startActivity(intent)
         }
 
         return view
