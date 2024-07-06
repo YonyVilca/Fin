@@ -1,4 +1,4 @@
-package com.example.f
+package com.example.f.activity
 
 import android.os.Bundle
 import android.widget.ArrayAdapter
@@ -8,10 +8,12 @@ import android.widget.RadioGroup
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.f.manager.CartManager
+import com.example.f.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-
+// Actividad para mostrar los detalles del pedido
 class OrderDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,22 +29,23 @@ class OrderDetailActivity : AppCompatActivity() {
         val buttonBack: Button = findViewById(R.id.button_back)
         val buttonCompletePurchase: Button = findViewById(R.id.button_complete_purchase)
 
-        // Dummy data for spinners and list view
+        // Datos de ejemplo para los spinners y list view
         val departments = listOf("Departamento 1", "Departamento 2")
         val provinces = listOf("Provincia 1", "Provincia 2")
         val districts = listOf("Distrito 1", "Distrito 2")
         val pharmacies = listOf("Farmacia 1", "Farmacia 2")
 
-        // Set adapters for spinners
+        // Configurar adaptadores para los spinners
         spinnerDepartment.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, departments)
         spinnerProvince.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, provinces)
         spinnerDistrict.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, districts)
 
-        // Set adapter for pharmacies list view
+        // Configurar adaptador para el list view de farmacias
         listViewPharmacies.adapter = ArrayAdapter(this, android.R.layout.simple_list_item_single_choice, pharmacies)
         listViewPharmacies.choiceMode = ListView.CHOICE_MODE_SINGLE
 
-        // Set button listeners
+        // Configurar listeners para los botones
+
         buttonBack.setOnClickListener {
             finish()
         }

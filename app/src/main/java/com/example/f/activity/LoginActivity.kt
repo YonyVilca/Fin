@@ -1,4 +1,4 @@
-package com.example.f
+package com.example.f.activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,7 +7,9 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-
+import com.example.f.R
+import com.example.f.repository.UserRepository
+// Actividad para la pantalla de inicio de sesión
 class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,7 +23,7 @@ class LoginActivity : AppCompatActivity() {
         loginButton.setOnClickListener {
             val email = emailEditText.text.toString()
             val password = passwordEditText.text.toString()
-
+            // Intentar iniciar sesión con las credenciales proporcionadas
             if (email.isNotEmpty() && password.isNotEmpty()) {
                 val userLiveData = UserRepository.loginUser(this, email, password)
                 userLiveData.observe(this, Observer { user ->

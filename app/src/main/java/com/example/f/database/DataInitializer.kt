@@ -1,14 +1,19 @@
-package com.example.f
+package com.example.f.database
 
 import android.content.Context
+import com.example.f.model.Product
+import com.example.f.repository.ProductRepository
+import com.example.f.model.User
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 object DataInitializer {
-
+    // Inicializador de datos para poblar la base de datos con datos de ejemplo
     fun initializeData(context: Context) {
         CoroutineScope(Dispatchers.IO).launch {
+
+            // Método para inicializar los datos en la base de datos
             // Llenar la tabla de usuarios
             val users = listOf(
                 User(email = "user1@example.com", password = "password1"),

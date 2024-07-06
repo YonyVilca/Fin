@@ -1,8 +1,8 @@
-package com.example.f
+package com.example.f.database
 
 import android.content.Context
 import androidx.room.Room
-
+// Singleton para construir la base de datos Room
 object DatabaseBuilder {
     private var INSTANCE: AppDatabase? = null
 

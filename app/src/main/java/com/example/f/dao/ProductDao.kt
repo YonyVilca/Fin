@@ -1,11 +1,12 @@
-package com.example.f
+package com.example.f.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
-
+import com.example.f.model.Product
+// DAO para acceder a los productos en la base de datos
 @Dao
 interface ProductDao {
     @Insert

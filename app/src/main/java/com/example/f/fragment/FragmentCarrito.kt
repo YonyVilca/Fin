@@ -1,4 +1,4 @@
-package com.example.f
+package com.example.f.fragment
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,7 +11,12 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-
+import com.example.f.model.CartItem
+import com.example.f.manager.CartManager
+import com.example.f.R
+import com.example.f.activity.OrderDetailActivity
+import com.example.f.adapter.CartAdapter
+// Fragmento para mostrar el carrito de compra
 class FragmentCarrito : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
@@ -30,10 +35,14 @@ class FragmentCarrito : Fragment() {
         checkoutButton = view.findViewById(R.id.checkout_button)
 
         cartItems = CartManager.getCartItems().toMutableList()
-
+        // Inicializar el adaptador del carrito
         cartAdapter = CartAdapter(requireContext(), cartItems, { cartItem, newQuantity ->
             CartManager.updateQuantity(requireContext(), cartItem.product, newQuantity) {
-                Toast.makeText(requireContext(), "No hay stock suficiente para ${cartItem.product.name}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    "No hay stock suficiente para ${cartItem.product.name}",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
             updateCart()
         }, { cartItem ->
@@ -45,7 +54,7 @@ class FragmentCarrito : Fragment() {
         recyclerView.adapter = cartAdapter
 
         updateTotalPrice()
-
+        // Configurar listener para el botón de finalizar compra
         checkoutButton.setOnClickListener {
             val intent = Intent(context, OrderDetailActivity::class.java)
             startActivity(intent)
@@ -58,14 +67,14 @@ class FragmentCarrito : Fragment() {
         super.onResume()
         updateCart()
     }
-
+    // Actualizar la lista del carrito y el precio total
     private fun updateCart() {
         cartItems.clear()
         cartItems.addAll(CartManager.getCartItems())
         cartAdapter.notifyDataSetChanged()
         updateTotalPrice()
     }
-
+    // Actualizar el precio total
     private fun updateTotalPrice() {
         val totalPrice = CartManager.getTotalPrice()
         totalPriceTextView.text = "Total: S/$totalPrice"

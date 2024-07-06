@@ -1,7 +1,10 @@
-package com.example.f
+package com.example.f.repository
 
 import android.content.Context
 import androidx.lifecycle.LiveData
+import com.example.f.database.DatabaseBuilder
+import com.example.f.model.Product
+// Repositorio para gestionar operaciones relacionadas con productos
 
 object ProductRepository {
     fun insertProduct(context: Context, product: Product) {

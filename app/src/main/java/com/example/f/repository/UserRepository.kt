@@ -1,8 +1,10 @@
-package com.example.f
+package com.example.f.repository
 
 import android.content.Context
 import androidx.lifecycle.LiveData
-
+import com.example.f.database.DatabaseBuilder
+import com.example.f.model.User
+// Repositorio para gestionar operaciones relacionadas con usuarios
 object UserRepository {
     fun registerUser(context: Context, user: User) {
         val db = DatabaseBuilder.getInstance(context)

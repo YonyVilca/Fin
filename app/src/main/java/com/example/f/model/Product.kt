@@ -1,10 +1,10 @@
-package com.example.f
+package com.example.f.model
 
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
-
+// Entidad Producto para la base de datos
 @Parcelize
 @Entity(tableName = "products")
 data class Product(

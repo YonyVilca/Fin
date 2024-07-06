@@ -1,4 +1,4 @@
-package com.example.f
+package com.example.f.activity
 
 import android.os.Bundle
 import android.widget.Button
@@ -6,8 +6,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.f.manager.CartManager
+import com.example.f.model.Product
+import com.example.f.R
 import com.squareup.picasso.Picasso
-
+// Actividad para mostrar los detalles de un producto
 class ProductDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +34,11 @@ class ProductDetailActivity : AppCompatActivity() {
 
             addToCartButton.setOnClickListener {
                 CartManager.addProduct(this, product, {
-                    Toast.makeText(this, "No hay stock disponible para ${product.name}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this,
+                        "No hay stock disponible para ${product.name}",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 })
             }
 
