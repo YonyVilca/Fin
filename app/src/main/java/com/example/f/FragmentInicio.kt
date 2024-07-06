@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -30,15 +31,15 @@ class FragmentInicio : Fragment() {
 
         // Placeholder for products
         products = listOf(
-            Product(1, "Producto 1", 10.0, "https://via.placeholder.com/150", "Descripción del producto 1", 50, 100),
-            Product(2, "Producto 2", 20.0, "https://via.placeholder.com/150", "Descripción del producto 2", 150, 200),
-            Product(3, "Producto 3", 30.0, "https://via.placeholder.com/150", "Descripción del producto 3", 200, 300),
-            Product(4, "Producto 4", 40.0, "https://via.placeholder.com/150", "Descripción del producto 4", 300, 400),
-            Product(5, "Producto 5", 50.0, "https://via.placeholder.com/150", "Descripción del producto 5", 250, 500)
+            Product(1, "Producto 1", 10.0, "https://via.placeholder.com/150", "Descripción del producto 1", 0, 10),
+            Product(2, "Producto 2", 20.0, "https://via.placeholder.com/150", "Descripción del producto 2", 0, 5),
+            // Añadir más productos aquí
         )
 
-        productAdapter = ProductAdapter(products) { product ->
-            CartManager.addProduct(requireContext(), product)
+        productAdapter = ProductAdapter(requireContext(), products) { product ->
+            CartManager.addProduct(requireContext(), product, {
+                Toast.makeText(requireContext(), "No hay stock disponible para ${product.name}", Toast.LENGTH_SHORT).show()
+            })
         }
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = productAdapter

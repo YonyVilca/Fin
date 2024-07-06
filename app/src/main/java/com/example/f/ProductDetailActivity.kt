@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.squareup.picasso.Picasso
 
@@ -29,8 +30,9 @@ class ProductDetailActivity : AppCompatActivity() {
             Picasso.get().load(product.imageUrl).into(productImage)
 
             addToCartButton.setOnClickListener {
-                CartManager.addProduct(this, product)
-                finish()
+                CartManager.addProduct(this, product, {
+                    Toast.makeText(this, "No hay stock disponible para ${product.name}", Toast.LENGTH_SHORT).show()
+                })
             }
 
             backButton.setOnClickListener {

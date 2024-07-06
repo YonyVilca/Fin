@@ -14,7 +14,7 @@ object DataInitializer {
                 User(email = "user1@example.com", password = "password1"),
                 User(email = "user2@example.com", password = "password2")
             )
-            users.forEach { UserRepository.registerUser(context, it) }
+
 
             // Llenar la tabla de productos
             val products = listOf(

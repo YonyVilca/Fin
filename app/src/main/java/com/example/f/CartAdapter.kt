@@ -1,5 +1,6 @@
 package com.example.f
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,11 +8,10 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.f.R
-import com.example.f.CartItem
 import com.squareup.picasso.Picasso
 
 class CartAdapter(
+    private val context: Context,
     private val cartItemList: List<CartItem>,
     private val onQuantityChangedListener: (CartItem, Int) -> Unit,
     private val onRemoveClickListener: (CartItem) -> Unit
@@ -35,7 +35,7 @@ class CartAdapter(
     override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
         val cartItem = cartItemList[position]
         holder.productName.text = cartItem.product.name
-        holder.productPrice.text = "$${cartItem.product.price}"
+        holder.productPrice.text = "S/${cartItem.product.price}"
         holder.productQuantity.text = cartItem.quantity.toString()
         Picasso.get().load(cartItem.product.imageUrl).into(holder.productImage)
 

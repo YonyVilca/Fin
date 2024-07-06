@@ -7,12 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class FragmentCarrito : Fragment() {
 
@@ -33,8 +31,10 @@ class FragmentCarrito : Fragment() {
 
         cartItems = CartManager.getCartItems().toMutableList()
 
-        cartAdapter = CartAdapter(cartItems, { cartItem, newQuantity ->
-            CartManager.updateQuantity(requireContext(), cartItem.product, newQuantity)
+        cartAdapter = CartAdapter(requireContext(), cartItems, { cartItem, newQuantity ->
+            CartManager.updateQuantity(requireContext(), cartItem.product, newQuantity) {
+                Toast.makeText(requireContext(), "No hay stock suficiente para ${cartItem.product.name}", Toast.LENGTH_SHORT).show()
+            }
             updateCart()
         }, { cartItem ->
             CartManager.removeProduct(requireContext(), cartItem.product)
@@ -54,6 +54,11 @@ class FragmentCarrito : Fragment() {
         return view
     }
 
+    override fun onResume() {
+        super.onResume()
+        updateCart()
+    }
+
     private fun updateCart() {
         cartItems.clear()
         cartItems.addAll(CartManager.getCartItems())
@@ -63,6 +68,6 @@ class FragmentCarrito : Fragment() {
 
     private fun updateTotalPrice() {
         val totalPrice = CartManager.getTotalPrice()
-        totalPriceTextView.text = "Total: S/. $totalPrice"
+        totalPriceTextView.text = "Total: S/$totalPrice"
     }
 }

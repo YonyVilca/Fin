@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ListView
-import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class OrderDetailActivity : AppCompatActivity() {
 
@@ -60,8 +62,11 @@ class OrderDetailActivity : AppCompatActivity() {
             }
 
             if (selectedPaymentOption.isNotEmpty() && selectedVoucherOption.isNotEmpty()) {
+                CoroutineScope(Dispatchers.IO).launch {
+                    CartManager.clearCart()
+                }
+
                 Toast.makeText(this, "Compra realizada con éxito", Toast.LENGTH_SHORT).show()
-                // Aquí puedes agregar la lógica para finalizar la compra
                 finish()
             } else {
                 Toast.makeText(this, "Seleccione todas las opciones", Toast.LENGTH_SHORT).show()
