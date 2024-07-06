@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.example.f.R
 import com.example.f.repository.UserRepository
+
 // Actividad para la pantalla de inicio de sesión
 class LoginActivity : AppCompatActivity() {
 
@@ -23,8 +24,9 @@ class LoginActivity : AppCompatActivity() {
         loginButton.setOnClickListener {
             val email = emailEditText.text.toString()
             val password = passwordEditText.text.toString()
-            // Intentar iniciar sesión con las credenciales proporcionadas
+
             if (email.isNotEmpty() && password.isNotEmpty()) {
+                // Intentar iniciar sesión con las credenciales proporcionadas
                 val userLiveData = UserRepository.loginUser(this, email, password)
                 userLiveData.observe(this, Observer { user ->
                     if (user != null) {

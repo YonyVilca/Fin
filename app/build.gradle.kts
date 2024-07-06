@@ -54,6 +54,9 @@ dependencies {
     // LiveData dependencies
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0")
+    implementation("com.github.bumptech.glide:glide:4.12.0")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.12.0")
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
 
     // Otras dependencias
     implementation("androidx.core:core-ktx:1.7.0")

@@ -6,13 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.f.manager.CartManager
-import com.example.f.model.Product
 import com.example.f.R
 import com.example.f.adapter.ProductAdapter
+import com.example.f.manager.CartManager
+import com.example.f.model.Product
+import com.example.f.repository.ProductRepository
 
+// Fragmento para mostrar la lista de compras
 class FragmentCompras : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
@@ -26,24 +29,20 @@ class FragmentCompras : Fragment() {
         val view = inflater.inflate(R.layout.fragment_compras, container, false)
         recyclerView = view.findViewById(R.id.recycler_view_all_products)
 
-        // Placeholder para productos
-        products = listOf(
-            Product(1, "Producto 1", 10.0, "https://via.placeholder.com/150", "Descripción del producto 1", 0, 10),
-            Product(2, "Producto 2", 20.0, "https://via.placeholder.com/150", "Descripción del producto 2", 0, 5),
-            // Añadir más productos aquí
-        )
         // Inicializar el adaptador del producto
-        productAdapter = ProductAdapter(requireContext(), products) { product ->
-            CartManager.addProduct(requireContext(), product, {
-                Toast.makeText(
-                    requireContext(),
-                    "No hay stock disponible para ${product.name}",
-                    Toast.LENGTH_SHORT
-                ).show()
-            })
+        productAdapter = ProductAdapter(requireContext(), emptyList()) { product ->
+            CartManager.addProduct(requireContext(), product) {
+                Toast.makeText(requireContext(), "No hay stock disponible para ${product.name}", Toast.LENGTH_SHORT).show()
+            }
         }
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = productAdapter
+
+        // Obtener productos desde el repositorio
+        ProductRepository.getAllProducts(requireContext()).observe(viewLifecycleOwner, Observer { productList ->
+            products = productList
+            productAdapter.updateProducts(products)
+        })
 
         return view
     }

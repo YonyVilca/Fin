@@ -2,6 +2,7 @@ package com.example.f.adapter
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.drawable.Icon
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,17 +11,19 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.example.f.manager.CartManager
-import com.example.f.model.Product
+import com.bumptech.glide.Glide
 import com.example.f.R
 import com.example.f.activity.ProductDetailActivity
-import com.squareup.picasso.Picasso
+import com.example.f.manager.CartManager
+import com.example.f.model.Product
+
 // Adaptador para mostrar los productos en un RecyclerView
 class ProductAdapter(
     private val context: Context,
-    private val productList: List<Product>,
+    private var productList: List<Product>,
     private val onAddToCartClickListener: (Product) -> Unit
 ) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
+
     // ViewHolder para mantener las referencias a las vistas de un elemento del producto
     class ProductViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val productImage: ImageView = itemView.findViewById(R.id.product_image)
@@ -40,16 +43,14 @@ class ProductAdapter(
         val product = productList[position]
         holder.productName.text = product.name
         holder.productPrice.text = "S/${product.price}"
-        Picasso.get().load(product.imageUrl).into(holder.productImage)
+
+        val temporaliimf : Icon = Icon.createWithResource(context, R.drawable.sinimage)
+        holder.productImage.setImageIcon(temporaliimf)
+       // Glide.with(context).load(product.imageUrl).into(holder.productImage)
+
         // Configurar el listener para el botón de añadir al carrito
         holder.addToCartButton.setOnClickListener {
-            CartManager.addProduct(context, product, {
-                Toast.makeText(
-                    context,
-                    "No hay stock disponible para ${product.name}",
-                    Toast.LENGTH_SHORT
-                ).show()
-            })
+            onAddToCartClickListener(product)
         }
         holder.itemView.setOnClickListener {
             val context = holder.itemView.context
@@ -61,4 +62,10 @@ class ProductAdapter(
     }
 
     override fun getItemCount() = productList.size
+
+    // Método para actualizar los productos en el adaptador
+    fun updateProducts(newProducts: List<Product>) {
+        productList = newProducts
+        notifyDataSetChanged()
+    }
 }

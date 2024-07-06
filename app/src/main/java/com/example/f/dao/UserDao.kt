@@ -5,6 +5,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import com.example.f.model.User
+
 // DAO para acceder a los usuarios en la base de datos
 @Dao
 interface UserDao {

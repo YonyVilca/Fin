@@ -8,10 +8,12 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+
 // Objeto para gestionar el carrito de compras
 object CartManager {
     private val cartItems = mutableListOf<CartItem>()
 
+    // Añadir un producto al carrito
     fun addProduct(context: Context, product: Product, onStockUnavailable: () -> Unit) {
         if (product.quantity <= 0) {
             onStockUnavailable()
@@ -35,8 +37,10 @@ object CartManager {
             }
         }
     }
+
     // Obtener todos los elementos del carrito
     fun getCartItems(): List<CartItem> = cartItems
+
     // Actualizar la cantidad de un producto en el carrito
     fun updateQuantity(context: Context, product: Product, quantity: Int, onStockUnavailable: () -> Unit) {
         CoroutineScope(Dispatchers.IO).launch {
@@ -54,6 +58,7 @@ object CartManager {
             }
         }
     }
+
     // Remover un producto del carrito
     fun removeProduct(context: Context, product: Product) {
         CoroutineScope(Dispatchers.IO).launch {
@@ -69,10 +74,12 @@ object CartManager {
     fun getTotalPrice(): Double {
         return cartItems.sumByDouble { it.product.price * it.quantity }
     }
+
     // Limpiar el carrito
     fun clearCart() {
         cartItems.clear()
     }
+
     // Actualizar la cantidad de un producto en el inventario
     private fun updateProductQuantity(context: Context, product: Product, quantityChange: Int) {
         CoroutineScope(Dispatchers.IO).launch {
