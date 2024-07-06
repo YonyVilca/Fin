@@ -30,7 +30,7 @@ class ProductAdapter(
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val product = productList[position]
         holder.productName.text = product.name
-        holder.productPrice.text = "$${product.price}"
+        holder.productPrice.text = "S/${product.price}"
         Picasso.get().load(product.imageUrl).into(holder.productImage)
         holder.addToCartButton.setOnClickListener {
             onAddToCartClickListener(product)

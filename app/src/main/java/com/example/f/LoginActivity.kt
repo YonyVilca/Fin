@@ -6,6 +6,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 
 class LoginActivity : AppCompatActivity() {
 
@@ -18,15 +19,21 @@ class LoginActivity : AppCompatActivity() {
         val loginButton = findViewById<Button>(R.id.buttonLogin)
 
         loginButton.setOnClickListener {
-            val email = emailEditText.text.toString().trim()
-            val password = passwordEditText.text.toString().trim()
+            val email = emailEditText.text.toString()
+            val password = passwordEditText.text.toString()
 
             if (email.isNotEmpty() && password.isNotEmpty()) {
-                // Lógica de autenticación
-                val intent = Intent(this, MainActivity::class.java)
-                intent.putExtra("USER_NAME", email) // Pasar el nombre de usuario
-                startActivity(intent)
-                finish() // Finaliza la actividad de login para que el usuario no pueda volver a ella
+                val userLiveData = UserRepository.loginUser(this, email, password)
+                userLiveData.observe(this, Observer { user ->
+                    if (user != null) {
+                        val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                        intent.putExtra("USER_NAME", user.email)
+                        startActivity(intent)
+                        finish()
+                    } else {
+                        Toast.makeText(this@LoginActivity, "Credenciales incorrectas", Toast.LENGTH_SHORT).show()
+                    }
+                })
             } else {
                 Toast.makeText(this, "Por favor ingrese correo y contraseña", Toast.LENGTH_SHORT).show()
             }

@@ -10,6 +10,9 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class FragmentCarrito : Fragment() {
 
@@ -31,10 +34,10 @@ class FragmentCarrito : Fragment() {
         cartItems = CartManager.getCartItems().toMutableList()
 
         cartAdapter = CartAdapter(cartItems, { cartItem, newQuantity ->
-            CartManager.updateQuantity(cartItem.product, newQuantity)
+            CartManager.updateQuantity(requireContext(), cartItem.product, newQuantity)
             updateCart()
         }, { cartItem ->
-            CartManager.removeProduct(cartItem.product)
+            CartManager.removeProduct(requireContext(), cartItem.product)
             updateCart()
         })
 
@@ -60,6 +63,6 @@ class FragmentCarrito : Fragment() {
 
     private fun updateTotalPrice() {
         val totalPrice = CartManager.getTotalPrice()
-        totalPriceTextView.text = "Total: $$totalPrice"
+        totalPriceTextView.text = "Total: S/. $totalPrice"
     }
 }

@@ -24,12 +24,12 @@ class ProductDetailActivity : AppCompatActivity() {
             val backButton: Button = findViewById(R.id.back_button)
 
             productName.text = product.name
-            productPrice.text = "$${product.price}"
+            productPrice.text = "S/${product.price}"
             productDescription.text = "Descripción del producto: ${product.description}"
             Picasso.get().load(product.imageUrl).into(productImage)
 
             addToCartButton.setOnClickListener {
-                CartManager.addProduct(product)
+                CartManager.addProduct(this, product)
                 finish()
             }
 
