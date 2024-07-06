@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@color/background">
 
     <TextView
         android:id="@+id/user_name_text_view"
@@ -10,12 +10,13 @@
         android:layout_height="wrap_content"
         android:text="Hola, Usuario"
         android:textSize="18sp"
+        android:textColor="@color/colorPrimary"
         android:layout_marginBottom="16dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_best_sellers"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/user_name_text_view"/>
-
+        android:layout_below="@id/user_name_text_view"
+        android:padding="8dp"/>
 </RelativeLayout>

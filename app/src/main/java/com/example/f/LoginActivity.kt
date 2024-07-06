@@ -18,13 +18,13 @@ class LoginActivity : AppCompatActivity() {
         val loginButton = findViewById<Button>(R.id.buttonLogin)
 
         loginButton.setOnClickListener {
-            val email = emailEditText.text.toString()
-            val password = passwordEditText.text.toString()
+            val email = emailEditText.text.toString().trim()
+            val password = passwordEditText.text.toString().trim()
 
             if (email.isNotEmpty() && password.isNotEmpty()) {
-                // Aquí puedes agregar tu lógica de autenticación
-                // Si la autenticación es exitosa, navega a MainActivity
+                // Lógica de autenticación
                 val intent = Intent(this, MainActivity::class.java)
+                intent.putExtra("USER_NAME", email) // Pasar el nombre de usuario
                 startActivity(intent)
                 finish() // Finaliza la actividad de login para que el usuario no pueda volver a ella
             } else {

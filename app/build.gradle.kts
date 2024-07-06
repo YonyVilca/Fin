@@ -51,6 +51,7 @@ dependencies {
     implementation ("androidx.navigation:navigation-fragment-ktx:2.4.1")
     implementation ("androidx.navigation:navigation-ui-ktx:2.4.1")
     implementation ("com.squareup.picasso:picasso:2.71828")
+    implementation ("androidx.viewpager2:viewpager2:1.1.0")
     testImplementation(libs.junit)
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
